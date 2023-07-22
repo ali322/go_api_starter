@@ -9,12 +9,12 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gorilla/mux"
+
 	"app/handler"
 	"app/lib/config"
 	"app/lib/logger"
 	"app/util"
-
-	"github.com/gorilla/mux"
 )
 
 func setup() *mux.Router {
@@ -35,10 +35,10 @@ func main() {
 		Addr:    fmt.Sprintf(":%d", config.App.Port),
 	}
 	go func() {
+		log.Printf("server started at %d\n", config.App.Port)
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("failed to listen: %s\n", err)
 		}
-		log.Printf("server started at %d\n", config.App.Port)
 	}()
 	<-ctx.Done()
 	stop()
