@@ -1,0 +1,3 @@
+[app]
+port = 2004
+logdir = "log"
