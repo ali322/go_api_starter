@@ -13,12 +13,12 @@ func Reply(w http.ResponseWriter, v any) {
 	if err != nil {
 		Reject(w, -1, err)
 	}
-	fmt.Fprint(w, jsonStr)
+	fmt.Fprint(w, string(jsonStr))
 }
 
 func Reject(w http.ResponseWriter, code int, v any) {
 	jsonStr, _ := json.Marshal(map[string]any{
 		"code": code, "data": v,
 	})
-	fmt.Fprint(w, jsonStr)
+	fmt.Fprint(w, string(jsonStr))
 }
